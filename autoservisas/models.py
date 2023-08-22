@@ -61,4 +61,6 @@ class Uzsakymoeilutes(models.Model):
     paslaugos = models.ForeignKey('Paslaugos', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.paslaugos.pavadinimas} {self.kaina}'
+        return f'{self.paslaugos.pavadinimas} {self.kaina}' \
+               f' {self.uzsakymas.automobilis.klientas} ' \
+               f'{self.uzsakymas.automobilis.automobiliomodelis.marke}'
