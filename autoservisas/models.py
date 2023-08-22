@@ -21,6 +21,12 @@ class Automobilis(models.Model):
     class Meta:
         ordering = ['klientas']
     def __str__(self):
-        return f'{self.klientas} {self.valstybinis_nr}'
+        return f'{self.klientas} {self.valstybinis_nr} {self.automobiliomodelis.marke} {self.automobiliomodelis.modelis}'
 
+class Uzsakymas(models.Model):
+    data = models.DateField('Uzsakymo data')
+    suma = models.FloatField('Uzsakymo suma')
+    automobilis = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return f'{self.data, self.automobilis.klientas}'
