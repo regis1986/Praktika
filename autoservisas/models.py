@@ -45,7 +45,7 @@ class Uzsakymas(models.Model):
 
 
     def __str__(self):
-        return f'{self.data, self.id}'
+        return f'{self.automobilis} {self.data}'
 
 class Paslaugos(models.Model):
     pavadinimas = models.CharField('Paslaugos pavadinimas', max_length=100)
@@ -61,4 +61,4 @@ class Uzsakymoeilutes(models.Model):
     paslaugos = models.ForeignKey('Paslaugos', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.paslaugos.pavadinimas}'
+        return f'{self.paslaugos.pavadinimas} {self.kaina}'
