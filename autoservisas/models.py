@@ -22,7 +22,8 @@ class Automobilis(models.Model):
     class Meta:
         ordering = ['klientas']
     def __str__(self):
-        return f'{self.klientas} {self.valstybinis_nr} {self.automobiliomodelis.marke} {self.automobiliomodelis.modelis}'
+        return f'{self.klientas} {self.valstybinis_nr} {self.automobiliomodelis.marke} {self.automobiliomodelis.modelis} ' \
+
 
 class Uzsakymas(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
@@ -45,7 +46,7 @@ class Uzsakymas(models.Model):
 
 
     def __str__(self):
-        return f'{self.automobilis} {self.data}'
+        return f'{self.automobilis.klientas} {self.automobilis.valstybinis_nr}'
 
 class Paslaugos(models.Model):
     pavadinimas = models.CharField('Paslaugos pavadinimas', max_length=100)
@@ -61,6 +62,6 @@ class Uzsakymoeilutes(models.Model):
     paslaugos = models.ForeignKey('Paslaugos', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.paslaugos.pavadinimas} {self.kaina}' \
+        return f'{self.paslaugos.pavadinimas} {self.kaina} {self.kiekis}' \
                f' {self.uzsakymas.automobilis.klientas} ' \
                f'{self.uzsakymas.automobilis.automobiliomodelis.marke}'
