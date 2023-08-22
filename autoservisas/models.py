@@ -4,7 +4,7 @@ class AutomobilioModelis(models.Model):
     marke = models.CharField('Marke', max_length=100)
     modelis = models.CharField('Modelis', max_length=100)
     metai = models.IntegerField('Metai')
-    variklis = models.CharField('Galia', max_length=100)
+    variklis = models.CharField('Variklis', max_length=100)
 
     class Meta:
         ordering = ['marke']
