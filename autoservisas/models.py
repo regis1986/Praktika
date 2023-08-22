@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 
 class AutomobilioModelis(models.Model):
     marke = models.CharField('Marke', max_length=100)
@@ -24,9 +25,31 @@ class Automobilis(models.Model):
         return f'{self.klientas} {self.valstybinis_nr} {self.automobiliomodelis.marke} {self.automobiliomodelis.modelis}'
 
 class Uzsakymas(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     data = models.DateField('Uzsakymo data')
     suma = models.FloatField('Uzsakymo suma')
     automobilis = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
 
+    REPAIR_STATUS = (
+        ('p', 'Priimta'),
+        ('t', 'Tvarkoma'),
+        ('g', 'Galima paimti')
+    )
+    status = models.CharField(
+        max_length=1,
+        choices=REPAIR_STATUS,
+        blank=True,
+        default='p',
+        help_text='Tvarkymo statusas'
+    )
+
+
     def __str__(self):
-        return f'{self.data, self.automobilis.klientas}'
+        return f'{self.data, self.id}'
+
+class Paslaugos(models.Model):
+    pavadinimas = models.CharField('Paslaugos pavadinimas', max_length=100)
+    kaina = models.FloatField('Paslaugos kaina')
+
+    def __str__(self):
+        return f'{self.pavadinimas}'
