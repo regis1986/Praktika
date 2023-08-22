@@ -53,3 +53,12 @@ class Paslaugos(models.Model):
 
     def __str__(self):
         return f'{self.pavadinimas}'
+
+class Uzsakymoeilutes(models.Model):
+    kiekis = models.IntegerField('Uzsakymu kiekis', help_text='Kiek kartų užsakyta')
+    kaina = models.FloatField('Uzsakymo kaina')
+    uzsakymas = models.ForeignKey('Uzsakymas', on_delete=models.SET_NULL, null=True)
+    paslaugos = models.ForeignKey('Paslaugos', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return f'{self.paslaugos.pavadinimas}'
