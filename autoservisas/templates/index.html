@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Autoserviso paslaugos</h1>
+<p>Tik mes Jūsų automobilį sutvarkysime geriausiai</p>
+<p>Mes turime tokius auto ir darbus:</p>
+<ul>
+    <li>Autmobiliai: {{ num_auto_t }}</li>
+    <li>Paslaugos: {{ num_paslauos_t }}</li>
+    <li>Jau sutvarkyi automobiliai {{ num_auto_ready_t }}</li>
+    <li>Šiuo metu tvarkomi automobiliai {{ num_auto_ruosiami_t }}</li>
+    {# <li>Klientai: {{ num_klientai_t }} </li> #}
+</ul>
+{% endblock %}
