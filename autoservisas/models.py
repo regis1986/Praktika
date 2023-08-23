@@ -9,9 +9,14 @@ class AutomobilioModelis(models.Model):
 
     class Meta:
         ordering = ['marke']
+        verbose_name = 'Automobilio modelis'
+        verbose_name_plural = 'Automobilių modeliai'
+
 
     def __str__(self):
         return f'{self.marke} {self.modelis} {self.metai} {self.variklis}'
+
+
 
 class Automobilis(models.Model):
     valstybinis_nr = models.CharField('Valstybinis numeris', max_length=15)
@@ -21,6 +26,8 @@ class Automobilis(models.Model):
 
     class Meta:
         ordering = ['klientas']
+        verbose_name = 'Automobilis'
+        verbose_name_plural = 'Automobiliai'
     def __str__(self):
         return f'{self.klientas} {self.valstybinis_nr} {self.automobiliomodelis.marke} {self.automobiliomodelis.modelis} ' \
 
@@ -44,6 +51,10 @@ class Uzsakymas(models.Model):
         help_text='Tvarkymo statusas'
     )
 
+    class Meta:
+        verbose_name = 'Užsakymas'
+        verbose_name_plural = 'Užsakymai'
+
 
     def __str__(self):
         return f'{self.automobilis.klientas} {self.automobilis.valstybinis_nr}'
@@ -55,6 +66,11 @@ class Paslaugos(models.Model):
     def __str__(self):
         return f'{self.pavadinimas}'
 
+    class Meta:
+        verbose_name = 'Paslauga'
+        verbose_name_plural = 'Paslaugos'
+
+
 class Uzsakymoeilutes(models.Model):
     kiekis = models.IntegerField('Uzsakymu kiekis', help_text='Kiek kartų užsakyta')
     kaina = models.FloatField('Uzsakymo kaina')
@@ -65,3 +81,7 @@ class Uzsakymoeilutes(models.Model):
         return f'{self.paslaugos.pavadinimas} {self.kaina} {self.kiekis}' \
                f' {self.uzsakymas.automobilis.klientas} ' \
                f'{self.uzsakymas.automobilis.automobiliomodelis.marke}'
+
+    class Meta:
+        verbose_name = 'Visi užsakymai'
+        verbose_name_plural = 'Užsakymų eilutės'
