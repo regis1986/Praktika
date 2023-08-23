@@ -34,7 +34,7 @@ class Automobilis(models.Model):
 
 class Uzsakymas(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    data = models.DateField('Uzsakymo data')
+    data = models.DateField(verbose_name='Užsakymo data')
     suma = models.FloatField('Uzsakymo suma')
     automobilis = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
 
@@ -48,12 +48,19 @@ class Uzsakymas(models.Model):
         choices=REPAIR_STATUS,
         blank=True,
         default='p',
-        help_text='Tvarkymo statusas'
+        help_text='Tvarkymo statusas',
+        verbose_name='Statusas'
     )
 
     class Meta:
         verbose_name = 'Užsakymas'
         verbose_name_plural = 'Užsakymai'
+
+    # def display_status(self):
+    #     return ', '.join(uzsakymas.status for uzsakymas in self.uzsakymas.all())
+    #
+    # display_status.short_description = 'Statusas'
+
 
 
     def __str__(self):

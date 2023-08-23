@@ -8,7 +8,8 @@ class UzsakymoEilutesInLine(admin.TabularInline):
 
 @admin.register(Uzsakymas)
 class UzsakymasAdmin(admin.ModelAdmin):
-    list_display = ('data', 'automobilis')
+    list_display = ('id','data', 'automobilis', 'status')
+    list_editable = ('automobilis', 'data', 'status')
     inlines = [UzsakymoEilutesInLine]
 
 @admin.register(Automobilis)
