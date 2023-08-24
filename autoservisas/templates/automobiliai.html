@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Automobiliai</h1>
+<p>Serviso automobili sąrašas:</p>
+<ul>
+{% for auto in automobiliai_t %}
+        <li>{{ auto.automobiliomodelis.marke }} {{ auto.automobiliomodelis.modelis }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}

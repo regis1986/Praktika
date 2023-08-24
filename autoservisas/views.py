@@ -20,3 +20,10 @@ def index(request):
     }
 
     return render(request, 'index.html', context=context_t)
+
+def automobiliai(request):
+    automobiliai = Automobilis.objects.all()
+    context_t = {
+        'automobiliai_t': automobiliai
+    }
+    return render(request, 'automobiliai.html', context=context_t)

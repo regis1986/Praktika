@@ -3,6 +3,9 @@
     padding: 10;
     list-style: square;
     list-style-position: inside;
-    background: #d4d3c1;
+    background:#becfeb;
 
+}
+body {
+    background-color: #becfeb;
 }
