@@ -6,8 +6,9 @@
 
 
 <hr/>
-<h5>Servise yra šio auto {{ automobilis_t.automobiliomodelis.marke }} {{ automobilis_t.automobiliomodelis.modelis }} savininkai: </h5>
-{% for auto in automobilis_t.all %}
-<li>{{ utomobiliomodelis.marke}}</li>
+<h5>Servise yra šio auto {{ automobilis_t.automobiliomodelis.marke }}
+    {{ automobilis_t.automobiliomodelis.modelis }} duomenys: </h5>
+{% for aut in automobilis_t.all %}
+<li>{{ vin }}</li>
 {% endfor %}
 {% endblock %}

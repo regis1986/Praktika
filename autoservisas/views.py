@@ -29,7 +29,7 @@ def automobiliai(request):
     return render(request, 'automobiliai.html', context=context_t)
 
 
-def author(request, automobilis_id):
+def automobilis(request, automobilis_id):
     single_automobilis = get_object_or_404(Automobilis, pk=automobilis_id)
     context_t = {
         'automobilis_t': single_automobilis
