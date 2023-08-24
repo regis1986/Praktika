@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h4> {{ automobilis_t.automobiliomodelis.marke }} {{ automobilis_t.automobiliomodelis.modelis }} </h4>
+</hr>
+
+
+<hr/>
+<h5>Servise yra šio auto {{ automobilis_t.automobiliomodelis.marke }} {{ automobilis_t.automobiliomodelis.modelis }} savininkai: </h5>
+{% for auto in automobilis_t.all %}
+<li>{{ utomobiliomodelis.marke}}</li>
+{% endfor %}
+{% endblock %}

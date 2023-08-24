@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
 
@@ -27,3 +27,11 @@ def automobiliai(request):
         'automobiliai_t': automobiliai
     }
     return render(request, 'automobiliai.html', context=context_t)
+
+
+def author(request, automobilis_id):
+    single_automobilis = get_object_or_404(Automobilis, pk=automobilis_id)
+    context_t = {
+        'automobilis_t': single_automobilis
+    }
+    return render(request, 'automobilis.html', context=context_t)

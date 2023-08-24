@@ -5,8 +5,8 @@
 <h1>Automobiliai</h1>
 <p>Serviso automobili sąrašas:</p>
 <ul>
-{% for auto in automobiliai_t %}
-        <li>{{ auto.automobiliomodelis.marke }} {{ auto.automobiliomodelis.modelis }}</li>
+{% for automobilis in automobiliai_t %}
+        <li><a href="{% url 'automobilis-one' automobilis.id %}">{{ automobilis.automobiliomodelis.marke }} {{ automobilis.automobiliomodelis.modelis }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

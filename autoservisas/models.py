@@ -22,7 +22,7 @@ class Automobilis(models.Model):
     valstybinis_nr = models.CharField('Valstybinis numeris', max_length=15)
     vin = models.CharField('VIN numeris', max_length=21)
     klientas = models.CharField('Klientas', max_length=100)
-    automobiliomodelis = models.ForeignKey('AutomobilioModelis', on_delete=models.SET_NULL, null=True)
+    automobiliomodelis = models.ForeignKey('AutomobilioModelis', on_delete=models.SET_NULL, null=True, related_name='auto')
 
     class Meta:
         ordering = ['klientas']
