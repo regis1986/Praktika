@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h4> {{ automobilis_t.automobiliomodelis.marke }} {{ automobilis_t.automobiliomodelis.modelis }} </h4>
+<h4> {{ automobilis_t.marke }} {{ automobilis_t.modelis }} </h4>
 </hr>
 
 
 <hr/>
-<h5>Servise yra šio auto {{ automobilis_t.automobiliomodelis.marke }}
-    {{ automobilis_t.automobiliomodelis.modelis }} duomenys: </h5>
-{% for aut in automobilis_t.all %}
-<li>{{ vin }}</li>
+<h5>Servise yra šio auto {{ automobilis_t.marke }} {{ automobilis_t.modelis }} duomenys: </h5>
+{% for automobilis in automobilis_t.auto.all %}
+<li>{{ automobilis.vin }} {{ automobilis.valstybinis_nr }}
+    {{ automobilis.klientas }}</li>
 {% endfor %}
 {% endblock %}

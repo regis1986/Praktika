@@ -6,7 +6,7 @@
 <p>Serviso automobili sąrašas:</p>
 <ul>
 {% for automobilis in automobiliai_t %}
-        <li><a href="{% url 'automobilis-one' automobilis.id %}">{{ automobilis.automobiliomodelis.marke }} {{ automobilis.automobiliomodelis.modelis }}</a></li>
+        <li><a href="{% url 'automobilis-one' automobilis.id %}">{{ automobilis.marke }} {{ automobilis.modelis }}</a></li>
     {% endfor %}
 </ul>
 {% endblock %}

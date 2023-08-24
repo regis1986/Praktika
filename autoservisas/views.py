@@ -22,15 +22,15 @@ def index(request):
     return render(request, 'index.html', context=context_t)
 
 def automobiliai(request):
-    automobiliai = Automobilis.objects.all()
+    automobiliai = AutomobilioModelis.objects.all()
     context_t = {
         'automobiliai_t': automobiliai
     }
     return render(request, 'automobiliai.html', context=context_t)
 
 
-def automobilis(request, automobilis_id):
-    single_automobilis = get_object_or_404(Automobilis, pk=automobilis_id)
+def automobilis(request, automobiliomodelis_id):
+    single_automobilis = get_object_or_404(AutomobilioModelis, pk=automobiliomodelis_id)
     context_t = {
         'automobilis_t': single_automobilis
     }
