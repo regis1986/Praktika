@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Užsakymų sąrašas:</h1>
+{% if uzsakymas_list %}
+<ul>
+  {% for uzsakymas in uzsakymas_list %}
+  <li><a href="{% url 'uzsakymas-one' uzsakymas.id %}">{{ uzsakymas}}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Servise užsaymų nėra</p>
+{% endif %}
+{% endblock %}

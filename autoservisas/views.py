@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
+from django.views import generic
 from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
 
 def index(request):
@@ -35,3 +36,14 @@ def automobilis(request, automobiliomodelis_id):
         'automobilis_t': single_automobilis
     }
     return render(request, 'automobilis.html', context=context_t)
+
+
+class UzsakymasListView(generic.ListView):
+    model = Uzsakymas
+    template_name = 'uzsakymas_list.html'
+
+
+class UzsakymasDetailView(generic.DetailView):
+    model = Uzsakymas
+    context_object_name = 'uzsak'
+    template_name = 'uzsakymas_detail.html'

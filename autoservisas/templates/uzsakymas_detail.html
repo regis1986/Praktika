@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>{{ uzsak.automobilis.klientas }}</h1>
+<p class="text-light bg-dark">Automobilis: {{ uzsak.automobilis.automobiliomodelis.marke }}
+                                            {{ uzsak.automobilis.automobiliomodelis.modelis }}</p>
+<hr/>
+<p><strong>Valstybiniai numeriai:</strong> {{ uzsak.automobilis.valstybinis_nr}} </p>
+<hr/>
+<p><strong>Užsakymo data:</strong> {{ uzsak.data}} </p>
+<hr/>
+<h6>Užsakymo statusas:</h6>
+    <p class="{% if status == 'p' %} text-danger {% endif %}">
+    <strong>{{ uzsak.get_status_display }}</strong></p>
+<hr/>
+<h4>Atlikti darbai: </h4>
+{% for darbas in uzsak.uzsakymoeilutes_set.all %}
+<hr/>
+<p>Darbas: {{ darbas.paslaugos.pavadinimas }}, kiekis: {{ darbas.kiekis }}, kaina: {{ darbas.kaina }}</p>
+<hr/>
+{% endfor %}
+{% endblock %}
