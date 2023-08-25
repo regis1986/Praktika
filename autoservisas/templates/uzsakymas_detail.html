@@ -11,13 +11,17 @@
 <p><strong>Užsakymo data:</strong> {{ uzsak.data}} </p>
 <hr/>
 <h6>Užsakymo statusas:</h6>
-    <p class="{% if status == 'p' %} text-danger {% endif %}">
-    <strong>{{ uzsak.get_status_display }}</strong></p>
+    <p class="{% if status == 'p' %} text-danger
+              {% elif status == 't' %} text-success
+              {% else %} text-warning bg-dark
+              {% endif %}">
+     <strong>{{ uzsak.get_status_display }}</strong></p>
 <hr/>
 <h4>Atlikti darbai: </h4>
 {% for darbas in uzsak.uzsakymoeilutes_set.all %}
 <hr/>
 <p>Darbas: {{ darbas.paslaugos.pavadinimas }}, kiekis: {{ darbas.kiekis }}, kaina: {{ darbas.kaina }}</p>
 <hr/>
+
 {% endfor %}
 {% endblock %}
