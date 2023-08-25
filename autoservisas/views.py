@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views import generic
+from django.db.models import Q
 from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
 
 def index(request):
@@ -47,3 +48,20 @@ class UzsakymasDetailView(generic.DetailView):
     model = Uzsakymas
     context_object_name = 'uzsak'
     template_name = 'uzsakymas_detail.html'
+
+
+def search(request):
+    query = request.GET.get('search_text')
+    search_results = Uzsakymas.objects.filter(
+        Q(automobilis__klientas__icontains=query) |
+        Q(automobilis__vin__icontains=query) |
+        Q(automobilis__valstybinis_nr__icontains=query) |
+        Q(automobilis__automobiliomodelis__marke__icontains=query)
+    )
+    context_t = {
+        'query_t': query,
+        'search_results_t': search_results
+    }
+    return render(request, 'search.html', context=context_t)
+
+

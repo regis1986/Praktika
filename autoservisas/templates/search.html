@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Rezultatai pagal paiešką: {{ query_t}}</h1>
+{% if search_results_t %}
+<ul>
+  {% for uzsakymas in search_results_t %}
+  <li><a href="{% url 'uzsakymas-one' uzsakymas.id %}">{{ uzsakymas}}</a></li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Servise užsaymų nėra</p>
+{% endif %}
+{% endblock %}
