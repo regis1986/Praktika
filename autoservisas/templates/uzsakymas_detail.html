@@ -11,9 +11,9 @@
 <p><strong>Užsakymo data:</strong> {{ uzsak.data}} </p>
 <hr/>
 <h6>Užsakymo statusas:</h6>
-    <p class="{% if status == 'p' %} text-danger
-              {% elif status == 't' %} text-success
-              {% else %} text-warning bg-dark
+    <p class="{% if uzsak.status == 'p' %} text-danger
+              {% elif uzsak.status == 't' %} text-warning bg-dark
+              {% else %} text-success
               {% endif %}">
      <strong>{{ uzsak.get_status_display }}</strong></p>
 <hr/>
