@@ -26,7 +26,7 @@ def index(request):
     return render(request, 'index.html', context=context_t)
 
 def automobiliai(request):
-    paginator = Paginator(AutomobilioModelis.objects.all(), 3)
+    paginator = Paginator(AutomobilioModelis.objects.all(), 2)
     page_number = request.GET.get('page')
     page_automobiliomodelis = paginator.get_page(page_number)
     # automobiliai = AutomobilioModelis.objects.all()
@@ -47,7 +47,7 @@ def automobilis(request, automobiliomodelis_id):
 class UzsakymasListView(generic.ListView):
     model = Uzsakymas
     template_name = 'uzsakymas_list.html'
-    paginate_by = 3
+    paginate_by = 4
 
 
 class UzsakymasDetailView(generic.DetailView):

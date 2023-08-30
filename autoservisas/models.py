@@ -37,6 +37,8 @@ class Uzsakymas(models.Model):
     data = models.DateField(verbose_name='Užsakymo data')
     suma = models.FloatField('Uzsakymo suma')
     automobilis = models.ForeignKey('Automobilis', on_delete=models.SET_NULL, null=True)
+    cover = models.ImageField('Foto', upload_to='covers', null=True, blank=True)
+
 
     REPAIR_STATUS = (
         ('p', 'Priimta'),
