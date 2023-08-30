@@ -126,3 +126,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'autoservisas/media')
 
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = '/'

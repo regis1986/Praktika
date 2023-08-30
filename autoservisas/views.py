@@ -14,13 +14,19 @@ def index(request):
     num_klientai = Uzsakymas.objects.all().count()
     num_atliekami_darb = Uzsakymoeilutes.objects.count()
 
+    username = request.user
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+
     context_t = {
         'num_auto_t': num_auto,
         'num_paslauos_t': num_paslauos,
         'num_auto_ready_t': num_auto_ready,
         'num_auto_ruosiami_t': num_auto_ruosiami,
         'num_klientai_t': num_klientai,
-        'num_atliekami_darb_t': num_atliekami_darb
+        'num_atliekami_darb_t': num_atliekami_darb,
+        'username_t': username,
+        'num_visits_t': num_visits
     }
 
     return render(request, 'index.html', context=context_t)
