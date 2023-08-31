@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Mano darbai</h1>
+{% if uzsakymas_list %}
+<ul>
+    {% for uzsakymas_o in uzsakymas_list %}
+        <li>{{ uzsakymas_o.id }} <strong>{{ uzsakymas_o.automobilis.klientas | safe }}</strong> -
+            {{  uzsakymas_o.automobilis.automobiliomodelis.marke}}
+            {{  uzsakymas_o.automobilis.automobiliomodelis.modelis}}
+            valstybiniai nr: {{ uzsakymas_o.automobilis.valstybinis_nr}}
+
+        </li>
+     {% endfor %}
+</ul>
+{% else %}
+    <p>Šiuo metu Jūs neturite jokių darbų</p>
+{% endif %}
+
+{% endblock %}

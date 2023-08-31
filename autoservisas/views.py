@@ -4,6 +4,8 @@ from django.views import generic
 from django.db.models import Q
 from django.core.paginator import Paginator
 from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 def index(request):
@@ -76,4 +78,12 @@ def search(request):
     }
     return render(request, 'search.html', context=context_t)
 
+
+class UzsakymasForUserListView(LoginRequiredMixin, generic.ListView):
+    model = Uzsakymas
+    template_name = 'user_uzsakymai.html'
+    context_object_name = 'uzsakymas_list'
+
+    def get_queryset(self):
+        return Uzsakymas.objects.filter(worker=self.request.user).order_by('data')
 

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1>{{ uzsak.automobilis.klientas }}</h1>
+<h1>{{ uzsak.automobilis.klientas | safe }}</h1>
 <p class="text-light bg-dark">Automobilis: {{ uzsak.automobilis.automobiliomodelis.marke }}
                                             {{ uzsak.automobilis.automobiliomodelis.modelis }}</p>
 <hr/>

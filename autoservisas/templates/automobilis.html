@@ -8,7 +8,7 @@
 <hr/>
 <h5>Servise yra šio auto {{ automobilis_t.marke }} {{ automobilis_t.modelis }} duomenys: </h5>
 {% for automobilis in automobilis_t.auto.all %}
-<li>{{ automobilis.vin }} {{ automobilis.valstybinis_nr }}
-    {{ automobilis.klientas }}</li>
+<li>{{ automobilis.vin | safe }} {{ automobilis.valstybinis_nr }}
+    {{ automobilis.klientas | safe }}</li>
 {% endfor %}
 {% endblock %}

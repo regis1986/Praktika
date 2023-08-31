@@ -1,5 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+from datetime import date
 import uuid
+from tinymce.models import HTMLField
 
 class AutomobilioModelis(models.Model):
     marke = models.CharField('Marke', max_length=100)
@@ -21,7 +25,9 @@ class AutomobilioModelis(models.Model):
 class Automobilis(models.Model):
     valstybinis_nr = models.CharField('Valstybinis numeris', max_length=15)
     vin = models.CharField('VIN numeris', max_length=21)
+    vin = HTMLField()
     klientas = models.CharField('Klientas', max_length=100)
+    # klientas = HTMLField()
     automobiliomodelis = models.ForeignKey('AutomobilioModelis', on_delete=models.SET_NULL, null=True, related_name='auto')
 
     class Meta:
@@ -53,6 +59,7 @@ class Uzsakymas(models.Model):
         help_text='Tvarkymo statusas',
         verbose_name='Statusas'
     )
+    worker = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Užsakymas'
