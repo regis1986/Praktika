@@ -55,7 +55,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Atsijungti</a></li>
                 {% else %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'login' %}?next=/autoservisas">Prisijungti</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Registruotis</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registruotis</a></li>
                 {% endif %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Pradžia</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'automobiliai-all' %}">Automobiliai</a></li>
@@ -82,6 +82,14 @@
         </div>
     </div>
 </nav>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger" role="alert">
+            {{ message }}
+
+        </div>
+    {% endfor %}
+{% endif %}
 <div class="container">{% block content %}{% endblock %}</div>
 
 <script

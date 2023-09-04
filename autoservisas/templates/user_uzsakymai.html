@@ -5,10 +5,12 @@
 {% if uzsakymas_list %}
 <ul>
     {% for uzsakymas_o in uzsakymas_list %}
-        <li>{{ uzsakymas_o.id }} <strong>{{ uzsakymas_o.automobilis.klientas | safe }}</strong> -
+        <li>{{ uzsakymas_o.id }} <strong>{{ uzsakymas_o.automobilis.klientas }}</strong> -
             {{  uzsakymas_o.automobilis.automobiliomodelis.marke}}
             {{  uzsakymas_o.automobilis.automobiliomodelis.modelis}}
             valstybiniai nr: {{ uzsakymas_o.automobilis.valstybinis_nr}}
+
+            kaina: {{ kaina }}
 
         </li>
      {% endfor %}

@@ -1,10 +1,15 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
 from django.core.paginator import Paginator
-from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect
+from django.contrib import messages
+
+from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
+from .forms import UzsakymasReviewForm
 
 
 
@@ -58,10 +63,29 @@ class UzsakymasListView(generic.ListView):
     paginate_by = 4
 
 
-class UzsakymasDetailView(generic.DetailView):
+
+class UzsakymasDetailView(generic.edit.FormMixin, generic.DetailView):
     model = Uzsakymas
     context_object_name = 'uzsak'
     template_name = 'uzsakymas_detail.html'
+    form_class = UzsakymasReviewForm
+
+    def get_success_url(self):
+        return reverse('uzsakymas-one', kwargs={'pk': self.object.id})
+
+    def form_valid(self, form):
+        form.instance.uzsakymas = self.object
+        form.instance.reviewer = self.request.user
+        form.save()
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 def search(request):
@@ -87,3 +111,35 @@ class UzsakymasForUserListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         return Uzsakymas.objects.filter(worker=self.request.user).order_by('data')
 
+
+@csrf_protect
+def register(request):
+    if request.method == "POST":
+        # paimami duomenys iš formos
+        username = request.POST["username"]
+        email = request.POST["email"]
+        password = request.POST["password"]
+        password2 = request.POST["password2"]
+
+        if password == password2:
+            if User.objects.filter(username=username).exists():
+                messages.error(request, f"Vartotojo vardas {username} užimtas!")
+                return redirect('register') # jei uzimtas is naujo nukreipoiam i registracija
+
+            else: # tikrinama email, kai praejo password ir ussername patikrinimai
+                if User.objects.filter(email=email).exists():
+                    messages.error(request, f"Vartotojas su email adresu {email} egzistuoja!")
+                    return redirect('register') # jei uzimtas is naujo nukreipoiam i registracija
+                ####### patikrinimai praeiti
+                else:
+                    ### sukuriam nauja useri
+                    User.objects.create_user(username=username, email=email, password=password)
+                    messages.success(request, f'Vartotojas {username} sėkmingai sukurtas')
+                    return redirect('login')
+
+
+
+
+
+    else:
+        return render(request, "registration/registration.html")

@@ -9,6 +9,7 @@ urlpatterns = [
     path('uzsakymai/<uuid:pk>', views.UzsakymasDetailView.as_view(), name='uzsakymas-one'),
     path('search/', views.search, name='search-name'),
     path('myjobs/', views.UzsakymasForUserListView.as_view(), name='my-jobs'),
+    path('register/', views.register, name='register'),
 
 
     ]

@@ -133,11 +133,11 @@ LOGIN_REDIRECT_URL = '/'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-from .secret import EMAIL_HOST, EMAIL_POST, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER, EMAIL_USE_TLS
-# DEFAULT_FROM_EMAIL = "regis@regis.us.lt"
+from .secret import EMAIL_HOST, EMAIL_POST, EMAIL_HOST_PASSWORD, EMAIL_HOST_USER
+
 EMAIL_HOST = EMAIL_HOST
 EMAIL_POST = EMAIL_POST
-EMAIL_USE_TLS = EMAIL_USE_TLS
+EMAIL_USE_TLS = False
 EMAIL_HOST_USER = EMAIL_HOST_USER
 # el. pašto adresas iš kurio siųsite
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
