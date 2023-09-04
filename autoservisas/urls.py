@@ -10,6 +10,6 @@ urlpatterns = [
     path('search/', views.search, name='search-name'),
     path('myjobs/', views.UzsakymasForUserListView.as_view(), name='my-jobs'),
     path('register/', views.register, name='register'),
-
+    path('profilis/', views.profilis, name='profilis-url'),
 
     ]

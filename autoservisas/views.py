@@ -7,9 +7,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
-from .forms import UzsakymasReviewForm
+from .forms import UzsakymasReviewForm, UserUpdateForm, ProfilisUpdateForm
 
 
 
@@ -137,9 +138,26 @@ def register(request):
                     messages.success(request, f'Vartotojas {username} sėkmingai sukurtas')
                     return redirect('login')
 
-
-
-
-
     else:
         return render(request, "registration/registration.html")
+
+
+@login_required
+def profilis(request):
+    if request.method == 'GET':
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfilisUpdateForm(instance=request.user.profilis)
+    elif request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = ProfilisUpdateForm(request.POST, request.FILES, instance=request.user.profilis)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, 'Profilis atnaujintas')
+            return redirect('profilis-url')
+
+    context_t = {
+        'u_form': u_form,
+        'p_form': p_form
+    }
+    return render(request, 'profilis.html', context=context_t)
