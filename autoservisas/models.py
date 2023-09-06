@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 from datetime import date
 import uuid
@@ -21,7 +22,8 @@ class AutomobilioModelis(models.Model):
     def __str__(self):
         return f'{self.marke} {self.modelis} {self.metai} {self.variklis}'
 
-
+    def get_absolute_url(self):
+        return reverse('automobilis-one', args=[str(self.id)])
 
 class Automobilis(models.Model):
     valstybinis_nr = models.CharField('Valstybinis numeris', max_length=15)

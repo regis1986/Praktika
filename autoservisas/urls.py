@@ -11,5 +11,8 @@ urlpatterns = [
     path('myjobs/', views.UzsakymasForUserListView.as_view(), name='my-jobs'),
     path('register/', views.register, name='register'),
     path('profilis/', views.profilis, name='profilis-url'),
+    path('myjobs/new',views.UzsakymasbyUserCreateView.as_view(), name='my-jobs-new'),
+    path('myjobs/<uuid:pk>update', views.UzsakymasByUserUpdateView.as_view(), name='my-jobs-update'),
+    path('myjobs<uuid:pk>/delete', views.UzsakymasByUserDeleteView.as_view(), name='my-jobs-delete')
 
     ]

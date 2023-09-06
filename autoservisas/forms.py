@@ -1,4 +1,4 @@
-from .models import UzsakymasReview, User, Profilis
+from .models import UzsakymasReview, User, Profilis, Uzsakymas
 from django import forms
 
 
@@ -24,3 +24,15 @@ class ProfilisUpdateForm(forms.ModelForm):
     class Meta:
         model = Profilis
         fields = ['nuotrauka']
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class UserUzsakymasCreateForm(forms.ModelForm):
+    class Meta:
+        model = Uzsakymas
+        fields = ['automobilis', 'worker', 'data']
+        widgets = {'worker': forms.HiddenInput(),
+                   'data': DateInput()
+                   }

@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
 <h1>{{ uzsak.automobilis.klientas | safe }}</h1>
 <p class="text-light bg-dark">Automobilis: {{ uzsak.automobilis.automobiliomodelis.marke }}
                                             {{ uzsak.automobilis.automobiliomodelis.modelis }}</p>
 <hr/>
-
+{% if book.cover %}
 <img src="{{ uzsak.cover.url }}">
-
+{% endif %}
 <p><strong>Valstybiniai numeriai:</strong> {{ uzsak.automobilis.valstybinis_nr}} </p>
 <hr/>
 <p><strong>Užsakymo data:</strong> {{ uzsak.data}} </p>

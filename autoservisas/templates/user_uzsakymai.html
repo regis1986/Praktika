@@ -5,14 +5,15 @@
 {% if uzsakymas_list %}
 <ul>
     {% for uzsakymas_o in uzsakymas_list %}
-        <li>{{ uzsakymas_o.id }} <strong>{{ uzsakymas_o.automobilis.klientas }}</strong> -
+        <li><a href="{% url 'uzsakymas-one' uzsakymas_o.id %}">{{ uzsakymas_o.id }}</a>
+            <strong>{{ uzsakymas_o.automobilis.klientas }}</strong> -
             {{  uzsakymas_o.automobilis.automobiliomodelis.marke}}
             {{  uzsakymas_o.automobilis.automobiliomodelis.modelis}}
             valstybiniai nr: {{ uzsakymas_o.automobilis.valstybinis_nr}}
 
-            kaina: {{ kaina }}
-
         </li>
+     <a class="btn btn-secondary btn-sm" href="{% url 'my-jobs-update' uzsakymas_o.id %}">Redaguoti</a>
+    <a class="btn btn-danger btn-sm" href="{% url 'my-jobs-delete' uzsakymas_o.id %}">Ištrinti</a>
      {% endfor %}
 </ul>
 {% else %}

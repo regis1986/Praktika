@@ -3,14 +3,14 @@ from django.http import HttpResponse
 from django.views import generic
 from django.db.models import Q
 from django.core.paginator import Paginator
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import AutomobilioModelis, Automobilis, Paslaugos, Uzsakymoeilutes, Uzsakymas
-from .forms import UzsakymasReviewForm, UserUpdateForm, ProfilisUpdateForm
+from .forms import UzsakymasReviewForm, UserUpdateForm, ProfilisUpdateForm, UserUzsakymasCreateForm
 
 
 
@@ -161,3 +161,39 @@ def profilis(request):
         'p_form': p_form
     }
     return render(request, 'profilis.html', context=context_t)
+
+
+class UzsakymasbyUserCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Uzsakymas
+    # fields = ['data', 'automobilis']
+    success_url = '/autoservisas/myjobs'
+    template_name = 'user_uzsakymai_form.html'
+    form_class = UserUzsakymasCreateForm
+
+    def form_valid(self, form):
+        form.instance.worker = self.request.user
+        return super().form_valid(form)
+
+class UzsakymasByUserUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
+    model = Uzsakymas
+    fields = ['data', 'automobilis']
+    success_url = '/autoservisas/myjobs'
+    template_name = 'user_uzsakymai_form.html'
+
+    def form_valid(self, form):
+        form.instance.worker = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        uzsak = self.get_object()
+        return self.request.user == uzsak.worker
+
+
+class UzsakymasByUserDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+    model = Uzsakymas
+    template_name = 'user_job_delete.html'
+    success_url = '/autoservisas/myjobs'
+
+    def test_func(self):
+        uzsak = self.get_object()
+        return self.request.user == uzsak.worker
